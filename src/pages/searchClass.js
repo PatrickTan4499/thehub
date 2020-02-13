@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
+import Link from 'react-router-dom/Link';
 import { withFirebase } from '../components/Firebase';
 import { compose } from 'recompose';
 import firebase from '../components/Firebase';
@@ -22,6 +23,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import 'firebase/firestore';
+import Solution from '../components/Solution';
 
 
 const styles ={
@@ -236,7 +238,8 @@ class SearchClassBase extends Component {
                 {this.state.posts.map((item, idx) => {
                     return (
                         
-                        <Problem key={idx} problem={item.problem} solution={item.solution}/>
+                      <Button style = {{ margin: '0 0 0 0',
+                      display: 'flex'}} component={Link} to="/results">  <Problem key={idx} problem={item.problem} solution={item.solution}/></Button>
                     )
                 })
             }

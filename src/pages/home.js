@@ -22,7 +22,7 @@ const styles = {
         margin: 'auto auto 20px auto'
     },
     image: {
-        margin: '150px auto auto auto'
+        margin: '220px auto auto auto'
     },
     name: {
         margin: 'auto auto 10px auto'
