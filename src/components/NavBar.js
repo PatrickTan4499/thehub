@@ -41,6 +41,7 @@ const useStyles = makeStyles(theme => ({
         primary: {
         light: '#33c9dc',
         main: '#00bcd4',
+        mainGradient: "linear-gradient(30deg, #32bfde, #4b5ae8)",
         dark: '#008394',
         contrastText: '#fff'
       },
@@ -66,7 +67,7 @@ const Navigation = () => (
   const NavigationAuth = () => (
     
     <div>
-    <AppBar>
+    <AppBar style={{ background: theme.palette.primary.mainGradient }}>
         <Toolbar>
             <Button color="inherit" component={Link} to="/home">Home</Button>
             <Button color="inherit" component={Link} to="/search">Search</Button>
@@ -87,7 +88,7 @@ const Navigation = () => (
   
   const NavigationNonAuth = () => (
     <div>
-    <AppBar>
+    <AppBar style={{ background: theme.palette.primary.mainGradient }}>
         <Toolbar>
             <img src={StudyIcon} alt="logo" height="50px" width="50px" />
             <Typography variant="h5" >      

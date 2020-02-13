@@ -70,7 +70,8 @@ export class Solution extends Component {
                         </Card>
                         <br></br>
                         <div>
-                        <Typography variant="subtitle2" className={classes.name}>Posted by: name  </Typography>
+                        <Typography variant="subtitle2">Posted by: name </Typography>
+                        <br></br>
                         <Button color="primary" variant="contained"> Edit Post </Button>
                         </div>
             </div>

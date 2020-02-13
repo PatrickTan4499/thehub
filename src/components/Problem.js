@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import { Typography } from '@material-ui/core';
+import { Typography, CardActionArea } from '@material-ui/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -53,16 +53,17 @@ const styles ={
 export default withStyles(styles)(Problem);*/
 
 const Problem = (props) => (
-
-<Card style = {{ margin: '10px auto 10px auto'}}>
-            <CardContent>
+    <CardActionArea component="a" href="#">
+    <Card style = {{ margin: '10px auto 10px auto'}}>
+        <CardContent>
             <Typography variant="h5"  component="p" style = {{ textAlign: 'left', margin: 'auto auto auto 20px'}}> Problem: {props.problem} </Typography>
-                <Typography variant="body2" color="textSecondary" component="p" style = {{ textAlign: 'left', margin: 'auto auto auto 20px'}}>
+            <Typography variant="body2" color="textSecondary" component="p" style = {{ textAlign: 'left', margin: 'auto auto auto 20px'}}>
                 Solution: {props.solution}
-                 
-                </Typography>
-            </CardContent>
-        </Card>
+                
+            </Typography>
+        </CardContent>
+    </Card>
+    </CardActionArea>
 );
 
 export default withStyles(styles)(Problem);
