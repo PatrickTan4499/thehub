@@ -95,6 +95,7 @@ export default class AutoCompleteText extends React.Component {
                     {this.renderSuggestions()}
                     <button type="button" onClick={this.onSubmit} className="btn">Submit</button>
                 </form>
+                
             
             
         )

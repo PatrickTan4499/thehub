@@ -234,7 +234,7 @@ class SearchClassBase extends Component {
             <Grid container textAlign="left">
                 <Grid item xs={3}/>
                 <Grid item xs={6} style = {{ textAlign: 'center'}}>
-                <Typography variant="h3"> Class Name</Typography>
+                <Typography variant="h3"> Class Name (TODO: use firebase to make separate classes under posts and load them)</Typography>
                 {this.state.posts.map((item, idx) => {
                     return (
                         
