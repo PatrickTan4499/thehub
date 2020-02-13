@@ -11,7 +11,8 @@ import PropTypes from 'prop-types';
 import { logicalExpression } from '@babel/types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import AutoCopmleteText from '../components/Search/AutoCompleteText.js'
+import courses from '../components/Search/courses.js'
 import GoogleLogin from 'react-google-login';
 
 const styles = {
@@ -66,7 +67,10 @@ const INITIAL_STATE = {
                 <Grid item sm height="1000px">
                 <img src={StudyIcon} alt="logo" height="100px" width="100px" className={classes.image}/>
                 <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your class to begin learning! :) </Typography>
-                
+                <div className="App-Component">
+                     <AutoCopmleteText items={courses}/>
+                </div>
+                {/* 
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
                     <TextField 
                         id="outlined-basic" 
@@ -93,7 +97,7 @@ const INITIAL_STATE = {
                     </Button>
                     {error && <p>{error.message}</p>}
                 </form>
-
+                    */}
                 </Grid>
                 <Grid item sm/>
             </Grid>
