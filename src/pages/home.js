@@ -12,6 +12,7 @@ import { logicalExpression } from '@babel/types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AutoCopmleteText from '../components/Search/AutoCompleteText.js'
+import courses from '../components/Search/courses.js'
 import GoogleLogin from 'react-google-login';
 
 const styles = {
