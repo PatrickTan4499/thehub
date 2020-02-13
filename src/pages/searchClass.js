@@ -61,6 +61,8 @@ const styles ={
 }
 
 
+
+
 const SearchClassPage = () => (
 
     <SearchClass />
@@ -79,7 +81,11 @@ class SearchClassBase extends Component {
         this.state = {
             posts: [],      
             authUid: this.props.firebase.auth.O,
-            loading: false
+            loading: false,
+            problem: '',
+            solution: '',
+            notes: '',
+            keys: []
         };
 
         
@@ -88,15 +94,48 @@ class SearchClassBase extends Component {
     
       componentDidMount() {
         this.setState({ loading: true });
-    
+
         this.props.firebase
-          .user(this.state.authUid).on('value', snapshot => {
-            // console.log(snapshot.child("pantry_items").val());
-            this.setState({
-              posts: snapshot.child("posts").val()
-            });
-            this.state.posts = snapshot.child("posts").val();
+          .posts().on('value', snapshot => {
+             //console.log(snapshot.val());
+          /*  this.setState({
+              posts: Object.keys(snapshot.val())
+            });*/
+           // this.state.posts = Object.keys(snapshot.val());
+            console.log(this.state.posts);
+            var problems = snapshot.val();
+            var keys = Object.keys(snapshot.val());
+            for(var i = 0; i< keys.length; i++){
+                var k = keys[i];
+                var problem = problems[k].problem;
+                var solution =problems[k].solution;
+                var notes = problems[k].notes;
+                const formItem = {
+                    problem: problem,
+                    solution: solution,
+                    notes: notes,
+                  };
+          
+                      // add new item
+                      this.setState(prevState => ({
+                        posts: prevState.posts.concat(formItem)
+                      }));
+            }
+          /*  const formItem = {
+                problem: this.state.problem,
+                solution: this.state.solution,
+                notes: this.state.notes,
+              };
+      
+                  // add new item
+                  this.setState(prevState => ({
+                    posts: prevState.posts.concat(formItem)
+                  }));*/
+                //  this.state.posts.push(this.state.formItem);
           });
+ 
+
+
       }
     
       componentWillUnmount() {
@@ -133,20 +172,24 @@ class SearchClassBase extends Component {
     }
 
     handleSubmit(event) {
-       /* const formItem = {
+    /*    const formItem = {
           problem: this.state.problem,
           solution: this.state.solution,
           notes: this.state.notes,
         };
 
-             add new item
+            // add new item
             this.setState(prevState => ({
               posts: prevState.posts.concat(formItem)
-            }));
-            this.state.posts.push(this.state.formItem);*/
+            }));*/
+          //  this.state.posts.push(this.state.formItem);
             const problem = this.state.problem;
             const solution = this.state.solution;
-            const notes = this.state.notes;
+            var notes = this.state.notes;
+           /* if(this.state.notes == ''){
+                notes = ' ';
+            }*/
+            
           this.savePost(problem, solution, notes);
           this.setState({
             problem: '',
@@ -155,19 +198,19 @@ class SearchClassBase extends Component {
             open: false,
         });
 
-        /*this.props.firebase.user(this.state.authUid).update({
-            problems: this.state.posts
+       /* this.props.firebase.posts().update({
+            posts: this.state.posts
           });*/
     
         event.preventDefault();
       }
+
 
     render() {
         const { problem, solution, notes, error } = this.state;
         const { classes } = this.props;
         const { open } = this.state;
         const isInvalid = solution === '' || problem === '';
-
         /*                <ol>
                     {times.map((time) =>
                         <li key={time.id}>
@@ -190,24 +233,13 @@ class SearchClassBase extends Component {
                 <Grid item xs={3}/>
                 <Grid item xs={6} style = {{ textAlign: 'center'}}>
                 <Typography variant="h3"> Class Name</Typography>
-                <Problem/>
-
-                {this.state.posts && (
-          <h2>
-            {this.state.posts.map((ingredient, index) =>
-              <tr>
-                <td>{ingredient}</td>
-                {/* <button
-                  type="button"
-                  onClick={this.onRemovePantryItem()}
-                >
-                  Delete
-              </button> */}
-              </tr>
-            )}
-          </h2>
-        )}
-
+                {this.state.posts.map((item, idx) => {
+                    return (
+                        
+                        <Problem key={idx} problem={item.problem} solution={item.solution}/>
+                    )
+                })
+            }
                     <IconButton color="primary" size="medium" style = {{ margin: 'auto auto auto 92%'}}>
                          <AddCircleIcon style = {{ width: '50px',
                                                     height: '50px',
