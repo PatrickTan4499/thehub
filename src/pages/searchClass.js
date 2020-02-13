@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { withFirebase } from '../components/Firebase';
 import { compose } from 'recompose';
-
+import firebase from '../components/Firebase';
+import app from '../components/Firebase';
 import { withAuthorization, withEmailVerification, AuthUserContext, } from '../components/Session';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
@@ -20,7 +21,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-
+import 'firebase/firestore';
 
 
 const styles ={
@@ -60,7 +61,13 @@ const styles ={
 }
 
 
-export class searchClass extends Component {
+const SearchClassPage = () => (
+
+    <SearchClass />
+
+);
+
+class SearchClassBase extends Component {
     constructor(props){
         super(props);
 
@@ -70,12 +77,16 @@ export class searchClass extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
-            posts: [],
+            posts: [],      
+            authUid: this.props.firebase.auth.O,
+            loading: false
         };
 
+        
+
     }
-/*
-    componentDidMount() {
+    
+      componentDidMount() {
         this.setState({ loading: true });
     
         this.props.firebase
@@ -84,14 +95,17 @@ export class searchClass extends Component {
             this.setState({
               posts: snapshot.child("posts").val()
             });
-            this.state.localpantry = snapshot.child("posts").val();
+            this.state.posts = snapshot.child("posts").val();
           });
       }
-*/
+    
+      componentWillUnmount() {
+        this.props.firebase.posts().off();
+      }
     state = {
         open: false
     }
-    
+
     handleToggle = () => {
         this.setState({
             open: !this.state.open
@@ -107,26 +121,43 @@ export class searchClass extends Component {
     handlePostEditorChange(ev){
         this.setState({ [ev.target.name]: ev.target.value });
     }
-  
+    
+    savePost(problem, solution, notes){
+        var newPost = this.props.firebase.posts().push();
+        newPost.set({
+            problem: problem,
+            solution: solution,
+            notes: notes
+        });
+
+    }
+
     handleSubmit(event) {
-        const formItem = {
+       /* const formItem = {
           problem: this.state.problem,
           solution: this.state.solution,
           notes: this.state.notes,
         };
 
-            // add new item
+             add new item
             this.setState(prevState => ({
               posts: prevState.posts.concat(formItem)
             }));
-    
-          
+            this.state.posts.push(this.state.formItem);*/
+            const problem = this.state.problem;
+            const solution = this.state.solution;
+            const notes = this.state.notes;
+          this.savePost(problem, solution, notes);
           this.setState({
             problem: '',
             solution: '',
             notes: '',
             open: false,
         });
+
+        /*this.props.firebase.user(this.state.authUid).update({
+            problems: this.state.posts
+          });*/
     
         event.preventDefault();
       }
@@ -137,28 +168,57 @@ export class searchClass extends Component {
         const { open } = this.state;
         const isInvalid = solution === '' || problem === '';
 
+        /*                <ol>
+                    {times.map((time) =>
+                        <li key={time.id}>
+                        <div className="time-entry">
+                            {time.title}
+                        </div>
+                        <code>{time.time_stamp} seconds</code>
+                        </li>)}
+                </ol> 
+                                this.state.posts.map((item, idx) => {
+                    return (
+                        <Problem key={idx} problem={item.problem} solution={item.solution}/>
+                    )
+                })
+            }*/
         return (
             <div>
 
             <Grid container textAlign="left">
                 <Grid item xs={3}/>
-                <Grid item xs={6} className={classes.solution}>
+                <Grid item xs={6} style = {{ textAlign: 'center'}}>
                 <Typography variant="h3"> Class Name</Typography>
                 <Problem/>
-                {
-                this.state.posts.map((item, idx) => {
-                    return (
-                        <Problem key={idx} problem={item.problem} solution={item.solution}/>
-                    )
-                })
-            }
-                    <IconButton color="primary" size="medium" className={classes.button}>
-                         <AddCircleIcon className={classes.add} onClick={this.handleToggle}/>
+
+                {this.state.posts && (
+          <h2>
+            {this.state.posts.map((ingredient, index) =>
+              <tr>
+                <td>{ingredient}</td>
+                {/* <button
+                  type="button"
+                  onClick={this.onRemovePantryItem()}
+                >
+                  Delete
+              </button> */}
+              </tr>
+            )}
+          </h2>
+        )}
+
+                    <IconButton color="primary" size="medium" style = {{ margin: 'auto auto auto 92%'}}>
+                         <AddCircleIcon style = {{ width: '50px',
+                                                    height: '50px',
+                                                    textAlign: 'right'}} onClick={this.handleToggle}/>
                     </IconButton>
                     <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
-                        className={classes.modal}
+                        style = {{ display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',}}
                         open={open}
                         onClose={this.handleToggle}
                         closeAfterTransition
@@ -169,8 +229,8 @@ export class searchClass extends Component {
                     >
                         <Fade in={open}>
                         <form onSubmit={this.handleSubmit}>
-            <Card>
-            <CardContent>
+            <Card >
+            <CardContent >
                 <TextField
                     variant="outlined"
                     margin="normal"
@@ -180,7 +240,7 @@ export class searchClass extends Component {
                     label="Problem"
                     multiline
                     rows="3"
-                    className={classes.problem}
+
                     autoComplete="problem"
                     autoFocus
                     name="problem"
@@ -197,7 +257,7 @@ export class searchClass extends Component {
                     label="Solution"
                     multiline
                     rows="12"
-                    className={classes.solution}
+
                     autoComplete="solution"
                     autoFocus
                     name="solution"
@@ -213,7 +273,7 @@ export class searchClass extends Component {
                     label="Notes"
                     multiline
                     rows="2"
-                    className={classes.notes}
+
                     autoComplete="notes"
                     autoFocus
                     name="notes"
@@ -246,4 +306,14 @@ export class searchClass extends Component {
     }
 }
 
-export default withStyles(styles)(searchClass);
+//export default withStyles(styles)(SearchClassPage);
+
+const SearchClass = withFirebase(SearchClassBase);
+
+const condition = authUser => !!authUser;
+
+export default compose(
+    withStyles(styles),
+  withAuthorization(condition),
+)(SearchClassPage);
+

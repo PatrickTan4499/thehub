@@ -1,4 +1,5 @@
 import app from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
@@ -12,12 +13,18 @@ const config = {
     messagingSenderId: "408139708787",
   };
 
-  //firebase.firestore().settings({ timestampsInSnapshots: true})
+
+
   class Firebase {
     constructor() {
       app.initializeApp(config);
       this.auth = app.auth();
       this.db = app.database();
+
+     /* firebase.firestore().collection('times').add({
+        title: 'test',
+        time_stamp: 45
+    })*/
     }
 
   // *** Auth API ***
@@ -29,7 +36,11 @@ const config = {
 
   doSignOut = () => this.auth.signOut();
 
-  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  test = () => firebase.firestore().collection('times').add({
+    title: 'test',
+    time_stamp: 45
+});
+
 
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
@@ -43,7 +54,7 @@ const config = {
     // *** Classes API ***
     post = uid => this.db.ref(`users/`);
 
-    posts = uid => this.db.ref(`users/${uid}`);
+    posts = uid => this.db.ref(`posts`);
 }
 export default Firebase;
 export {app};
