@@ -1,4 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
+import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import { logicalExpression } from '@babel/types';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import './AutoCompleteText.css';
 {/* 
 .AutoCompleteText{
     width: 100%;
@@ -37,8 +48,23 @@ import React from 'react';
     background-color: rgba(128, 128, 128, 0.20);
 }
 */}
+const styles = {
+    search: {
+        
+    },
+    description: {
+        margin: 'auto auto 20px auto'
+    },
+    image: {
+        margin: '220px auto auto auto'
+    },
+    name: {
+        margin: 'auto auto 10px auto'
+    },
+    
+}
 
-export default class AutoCompleteText extends React.Component {
+class AutoCompleteText extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -81,23 +107,55 @@ export default class AutoCompleteText extends React.Component {
 
     onSubmit(e) {
         const { text } = this.state;
-        e.preventDefault();
+
         var course = {text}.text;
         console.log(course);
+        e.preventDefault();
     }
-
+    
     render() {
         const { text } = this.state;
-        return (
-            
-                <form className="AutoCompleteText">
+        const { name, error } = this.state;
+        const { classes } = this.props;
+        const isInvalid = text === '';
+
+        /*              <form className="AutoCompleteText">
                     <input value={text} onChange={this.onTextChanged} type="text" />
                     {this.renderSuggestions()}
                     <button type="button" onClick={this.onSubmit} className="btn">Submit</button>
+                </form> 
+                 */
+        return (
+            <div>
+            <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
+                <TextField 
+                    id="outlined-basic" 
+                    label="Enter Class Name:" 
+                    variant="outlined" 
+                    fullWidth 
+                    required
+                    autoComplete="name"
+                    autoFocus
+                    name="name"
+                    value={text}
+                    onChange={this.onTextChanged}
+                    className={classes.name}
+                    />
+                {this.renderSuggestions()}
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    disabled={isInvalid}
+                    >
+                    Search
+                </Button>
+                {error && <p>{error.message}</p>}
                 </form>
-                
-            
-            
+            </div>
         )
     }
 }
+
+export default withStyles(styles)(AutoCompleteText);

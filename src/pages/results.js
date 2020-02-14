@@ -18,13 +18,20 @@ const styles ={
 }
 
 export class results extends Component {
+
+    componentDidMount(){
+        const { problem, solution, notes } = this.props.location.state;
+
+    }
     render() {
         const { classes } = this.props;
+        const { problem, solution, notes } = this.props.location.state;
         return (
             <Grid container textAlign="left">
                 <Grid item sm/>
                 <Grid item sm className={classes.solution}>
-                    <Solution/>
+
+                    <Solution problem={problem} solution={solution} notes={notes}/>
                 </Grid>
 
                 <Grid item sm/>

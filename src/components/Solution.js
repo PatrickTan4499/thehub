@@ -27,43 +27,42 @@ const styles ={
 export class Solution extends Component {
     render() {
         const { classes } = this.props;
+        const{problem, solution, notes} = this.props;
         return (
             <div>
-                    <Typography variant="h4" >Problem:</Typography>
+                
+                    <Typography variant="h3" ><Box fontWeight="fontWeightBold" m={1}>
+                    Problem:
+                </Box>   </Typography>
                         <Card className={classes.description}>
                             <CardContent>
 
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                                 velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-                                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                <Typography variant="h6"  component="p">
+                                {problem}
+                                
                                 </Typography>
 
                             </CardContent>
                         </Card>
-                    <Typography variant="h4" >Solution:</Typography>
+                        <Typography variant="h3" ><Box fontWeight="fontWeightBold" m={1}>
+                    Solution:
+                </Box>   </Typography>
                         <Card className={classes.description}>
                             <CardContent>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                                 velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-                                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                <Typography variant="body2"  component="p">
+                                {solution}
+                                
                                 </Typography>
                             </CardContent>
                         </Card>
-                    <Typography variant="h4" >Notes:</Typography>
+                        <Typography variant="h4" ><Box fontWeight="fontWeightBold" m={1}>
+                    Notes:
+                </Box>   </Typography>
                         <Card className={classes.description}>
                             <CardContent>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                                 velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-                                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                <Typography variant="body2" component="p">
+                                {notes}
+                                
                                  
                                 </Typography>
                             </CardContent>

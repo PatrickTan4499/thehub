@@ -23,7 +23,7 @@ const styles = {
         margin: 'auto auto 20px auto'
     },
     image: {
-        margin: '220px auto auto auto'
+        margin: '150px auto auto auto'
     },
     name: {
         margin: 'auto auto 10px auto'
@@ -33,6 +33,7 @@ const styles = {
 const INITIAL_STATE = {
     name: '',
     error: null,
+    redirectToReferrer: false
   };
 
  class home extends Component {
@@ -48,7 +49,15 @@ const INITIAL_STATE = {
 
     onSubmit = event => {
         const { name } = this.state;
-        this.props.history.push('/search');
+        this.setState({
+            redirectToReferrer: true,
+        })
+        console.log(name);
+       // this.props.history.push('/search');
+    /*   <Redirect to={{
+        pathname: '/search',
+        state: { id: '123' }
+    }}/>;*/
         event.preventDefault();
     };
     
@@ -56,10 +65,15 @@ const INITIAL_STATE = {
         const { name, error } = this.state;
         const { classes } = this.props;
         const isInvalid = name === '';
+        const redirectToReferrer = this.state.redirectToReferrer;
 
-        const responseGoogle = (response) => {
-            console.log(response);
-          }
+        if (redirectToReferrer === true) {
+         //   return <Redirect to="/search" name={this.state.name}/>
+          return <Redirect to={{
+            pathname: '/search',
+            state: [{id: 1, name: 'Ford', color: 'red'}]
+        }}/>
+        }
 
         return (
             <Grid container textAlign="center">
@@ -67,9 +81,9 @@ const INITIAL_STATE = {
                 <Grid item sm height="1000px">
                 <img src={StudyIcon} alt="logo" height="100px" width="100px" className={classes.image}/>
                 <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your class to begin learning! :) </Typography>
-                <div className="App-Component">
+                <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
                      <AutoCopmleteText items={courses}/>
-                </div>
+                </form>
                 {/* 
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
                     <TextField 

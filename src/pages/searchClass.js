@@ -24,7 +24,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import 'firebase/firestore';
 import Solution from '../components/Solution';
-
+import './searchClass.css';
 
 const styles ={
     solution: {
@@ -74,7 +74,7 @@ const SearchClassPage = () => (
 class SearchClassBase extends Component {
     constructor(props){
         super(props);
-
+       
 
         this.addPost = this.addPost.bind(this);
         this.handlePostEditorChange = this.handlePostEditorChange.bind(this);
@@ -89,8 +89,8 @@ class SearchClassBase extends Component {
             notes: '',
             keys: []
         };
-
-        
+        console.log(this.props.name);
+        console.log(this.state.id);
 
     }
     
@@ -211,8 +211,11 @@ class SearchClassBase extends Component {
     render() {
         const { problem, solution, notes, error } = this.state;
         const { classes } = this.props;
+    //    const { data } = this.props.location.state;
         const { open } = this.state;
         const isInvalid = solution === '' || problem === '';
+   //     console.log(data);
+        console.log(this.props.location);
         /*                <ol>
                     {times.map((time) =>
                         <li key={time.id}>
@@ -234,13 +237,21 @@ class SearchClassBase extends Component {
             <Grid container textAlign="left">
                 <Grid item xs={3}/>
                 <Grid item xs={6} style = {{ textAlign: 'center'}}>
+
                 <Typography variant="h3"> Class Name (TODO: use firebase to make separate classes under posts and load them)</Typography>
                 {this.state.posts.map((item, idx) => {
                     return (
                         
-                      <Button style = {{ margin: '0 0 0 0',
-                      display: 'flex'}} component={Link} to="/results">  <Problem key={idx} problem={item.problem} solution={item.solution}/></Button>
-                    )
+                    //  <Button style = {{ margin: '0 0 0 0', padding: '0 0 0 0',
+                     // display: 'flex'}} component={Link} to="/results">  <Problem key={idx} problem={item.problem} solution={item.solution}/></Button>
+                      <Link to={{
+                        pathname: '/results',
+                        state: {
+                          problem: item.problem,
+                          solution: item.solution,
+                          notes: item.notes
+                        }}} className="btn-primary"><Problem key={idx} problem={item.problem} solution={item.solution}/></Link>
+                      )
                 })
             }
                     <IconButton color="primary" size="medium" style = {{ margin: 'auto auto auto 92%'}}>

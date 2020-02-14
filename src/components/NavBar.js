@@ -71,7 +71,7 @@ const Navigation = () => (
         <Toolbar>
             <Button color="inherit" component={Link} to="/home">Home</Button>
             <Button color="inherit" component={Link} to="/search">Search</Button>
-            <Button color="inherit" component={Link} to="/results">Results</Button>
+        {/*<Button color="inherit" component={Link} to="/results">Results</Button> */} 
                   <Typography style={{flex: 1}}></Typography>
             <SignOutButton/>
             <img src={StudyIcon} alt="logo" height="50px" width="50px" />
