@@ -12,7 +12,7 @@ const withAuthorization = condition => Component => {
       this.listener = this.props.firebase.auth.onAuthStateChanged(
         authUser => {
           if (!condition(authUser)) {
-            this.props.history.push('/');
+            this.props.history.push('/signin');
           }
         },
       );

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { withAuthorization, withEmailVerification, AuthUserContext, } from '../components/Session';
 import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
+import { compose } from 'recompose';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
@@ -31,7 +35,7 @@ const styles = {
 }
 
 const INITIAL_STATE = {
-    name: '',
+    name: 'abc',
     error: null,
     redirectToReferrer: false
   };
@@ -40,11 +44,20 @@ const INITIAL_STATE = {
     constructor(props) {
         super(props);
 
-        this.state = { ...INITIAL_STATE };
+        this.state = { name: 'abc',
+        error: null,
+        redirectToReferrer: false};
     }
     
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
+    };
+
+    updateName = (newName) => {
+        console.log(newName);
+        this.state.name = newName;
+        //this.setState({name: newName});
+        console.log(this.state.name);
     };
 
     onSubmit = event => {
@@ -62,28 +75,31 @@ const INITIAL_STATE = {
     };
     
     render() {
+        console.log(this.props.location);
         const { name, error } = this.state;
         const { classes } = this.props;
         const isInvalid = name === '';
         const redirectToReferrer = this.state.redirectToReferrer;
 
         if (redirectToReferrer === true) {
-         //   return <Redirect to="/search" name={this.state.name}/>
-          return <Redirect to={{
+         //  return <Redirect to="/search" name={this.state.name}/>
+         //console.log(name);
+          return (<Redirect to={{
             pathname: '/search',
-            state: [{id: 1, name: 'Ford', color: 'red'}]
-        }}/>
+            state: {name: this.state.name}
+        }}/>)
         }
 
         return (
             <Grid container textAlign="center">
-                <Grid item sm/>
-                <Grid item sm height="1000px">
+                <Grid item xs={3}/>
+                <Grid item xs={6} height="1000px">
                 <img src={StudyIcon} alt="logo" height="100px" width="100px" className={classes.image}/>
                 <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your class to begin learning! :) </Typography>
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
-                     <AutoCopmleteText items={courses}/>
-                </form>
+                    <AutoCopmleteText items={courses} updateName={this.updateName.bind(this)} name={this.state.name}/> 
+                
+                        </form>
                 {/* 
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
                     <TextField 
@@ -113,7 +129,7 @@ const INITIAL_STATE = {
                 </form>
                     */}
                 </Grid>
-                <Grid item sm/>
+                <Grid item xs={3}/>
             </Grid>
         )
     }
@@ -122,4 +138,12 @@ const INITIAL_STATE = {
 home.propTypes = {
     classes: PropTypes.object.isRequired
 }
-export default withStyles(styles)(home);
+
+const condition = authUser => !!authUser;
+
+export default compose(
+    withStyles(styles),
+    withAuthorization(condition),
+  withRouter,
+)(home);
+//export default withStyles(styles)(home);

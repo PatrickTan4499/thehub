@@ -107,9 +107,12 @@ class AutoCompleteText extends React.Component {
 
     onSubmit(e) {
         const { text } = this.state;
+        console.log(this.props.name);
 
+        console.log(this.props.name);
         var course = {text}.text;
         console.log(course);
+        this.props.updateName(course);
         e.preventDefault();
     }
     

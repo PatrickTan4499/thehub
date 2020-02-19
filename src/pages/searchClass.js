@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import Link from 'react-router-dom/Link';
 import { withFirebase } from '../components/Firebase';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import firebase from '../components/Firebase';
 import app from '../components/Firebase';
@@ -74,7 +75,7 @@ const SearchClassPage = () => (
 class SearchClassBase extends Component {
     constructor(props){
         super(props);
-       
+        console.log(this.props.location);
 
         this.addPost = this.addPost.bind(this);
         this.handlePostEditorChange = this.handlePostEditorChange.bind(this);
@@ -87,15 +88,20 @@ class SearchClassBase extends Component {
             problem: '',
             solution: '',
             notes: '',
-            keys: []
+            keys: [],
         };
-        console.log(this.props.name);
-        console.log(this.state.id);
+        
+       // console.log(this.state.id);
 
     }
     
       componentDidMount() {
+        console.log(this.props.location);
+    
         this.setState({ loading: true });
+
+            
+        
 
         this.props.firebase
           .posts().on('value', snapshot => {
@@ -104,7 +110,7 @@ class SearchClassBase extends Component {
               posts: Object.keys(snapshot.val())
             });*/
            // this.state.posts = Object.keys(snapshot.val());
-            console.log(this.state.posts);
+           // console.log(this.state.posts);
             var problems = snapshot.val();
             var keys = Object.keys(snapshot.val());
             for(var i = 0; i< keys.length; i++){
@@ -164,6 +170,7 @@ class SearchClassBase extends Component {
     }
     
     savePost(problem, solution, notes){
+      //  var newPost = this.props.firebase.db.ref('test').push(); this works!!!
         var newPost = this.props.firebase.posts().push();
         newPost.set({
             problem: problem,
@@ -209,13 +216,17 @@ class SearchClassBase extends Component {
 
 
     render() {
+       // console.log(this.props.location);
         const { problem, solution, notes, error } = this.state;
+        const { name} = this.props.location.state;
         const { classes } = this.props;
+        
     //    const { data } = this.props.location.state;
         const { open } = this.state;
         const isInvalid = solution === '' || problem === '';
-   //     console.log(data);
-        console.log(this.props.location);
+        console.log(name);
+       
+     //   console.log(color);
         /*                <ol>
                     {times.map((time) =>
                         <li key={time.id}>
@@ -238,7 +249,7 @@ class SearchClassBase extends Component {
                 <Grid item xs={3}/>
                 <Grid item xs={6} style = {{ textAlign: 'center'}}>
 
-                <Typography variant="h3"> Class Name (TODO: use firebase to make separate classes under posts and load them)</Typography>
+                <Typography variant="h3">{name} </Typography>
                 {this.state.posts.map((item, idx) => {
                     return (
                         
@@ -361,5 +372,7 @@ const condition = authUser => !!authUser;
 export default compose(
     withStyles(styles),
   withAuthorization(condition),
-)(SearchClassPage);
+  withRouter,
+  withFirebase
+)(SearchClassBase);
 

@@ -4,3 +4,4 @@ export const SIGN_IN = '/signin';
 export const LOGIN = '/login';
 export const HOME = '/home';
 export const RESULTS = '/results';
+export const SEARCH = '/search';

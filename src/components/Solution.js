@@ -67,12 +67,12 @@ export class Solution extends Component {
                                 </Typography>
                             </CardContent>
                         </Card>
-                        <br></br>
+                     {/*   <br></br>
                         <div>
                         <Typography variant="subtitle2">Posted by: name </Typography>
                         <br></br>
                         <Button color="primary" variant="contained"> Edit Post </Button>
-                        </div>
+                     </div>*/}
             </div>
         )
     }
