@@ -10,44 +10,7 @@ import { logicalExpression } from '@babel/types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AutoCompleteText.css';
-{/* 
-.AutoCompleteText{
-    width: 100%;
-    border: 1px solid grey;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.73);
-}
-.AutoCompleteText input{
-    width: 100%;
-    border: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.73);
-    padding: 10px 5px;
-    box-sizing: border-box;
-    outline: none;
-}
-.AutoCompleteText ul{
-    list-style-type: none;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid grey;
-}
-.AutoCompleteText ul::before{
-    content: "";
-}
-.AutoCompleteText li{
-    padding: 10px 5px;
-    cursor: pointer;
-}
-.AutoCompleteText li:hover {
-    text-decoration: underline;
-    background-color: rgba(128, 128, 128, 0.20);
-}
-*/}
+
 const styles = {
     search: {
         
@@ -91,9 +54,14 @@ class AutoCompleteText extends React.Component {
         if(suggestions.length === 0){
             return null;
         }
+        var suggestion = [];
+        for (var i = 0; i < 5; i++) {
+            suggestion.push(suggestions[i]);
+        }
+        
         return (
             <ul>
-                {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+                {suggestion.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
             </ul>
         );
     }
