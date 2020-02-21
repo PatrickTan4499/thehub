@@ -75,14 +75,15 @@ const SearchClassPage = () => (
 class SearchClassBase extends Component {
     constructor(props){
         super(props);
-        console.log(this.props.location);
+      //  console.log(this.props.location);
 
-        this.addPost = this.addPost.bind(this);
+
         this.handlePostEditorChange = this.handlePostEditorChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
-            posts: [],      
+            posts: [],
+            prePosts: [],      
             authUid: this.props.firebase.auth.O,
             loading: false,
             problem: '',
@@ -96,39 +97,51 @@ class SearchClassBase extends Component {
     }
     
       componentDidMount() {
-        console.log(this.props.location);
+      //  console.log(this.props.location);
     
         this.setState({ loading: true });
 
-            
+        var {name} = this.props.location.state;
+         console.log(name);
+        //  var newPost = this.props.firebase.db.ref(name).push(); 
         
 
         this.props.firebase
-          .posts().on('value', snapshot => {
+          .db.ref(name).on('value', snapshot => {
              //console.log(snapshot.val());
           /*  this.setState({
               posts: Object.keys(snapshot.val())
             });*/
            // this.state.posts = Object.keys(snapshot.val());
            // console.log(this.state.posts);
-            var problems = snapshot.val();
-            var keys = Object.keys(snapshot.val());
-            for(var i = 0; i< keys.length; i++){
-                var k = keys[i];
-                var problem = problems[k].problem;
-                var solution =problems[k].solution;
-                var notes = problems[k].notes;
-                const formItem = {
-                    problem: problem,
-                    solution: solution,
-                    notes: notes,
-                  };
-          
-                      // add new item
-                      this.setState(prevState => ({
-                        posts: prevState.posts.concat(formItem)
-                      }));
-            }
+           var problems = snapshot.val();
+           if(problems){
+           var keys = Object.keys(snapshot.val());
+           for(var i = 0; i< keys.length; i++){
+               var k = keys[i];
+               var problem = problems[k].problem;
+               var solution =problems[k].solution;
+               var notes = problems[k].notes;
+               const formItem = {
+                   problem: problem,
+                   solution: solution,
+                   notes: notes,
+                 };
+         
+                    console.log(this.state.posts);
+                     // add new item
+                  /*   this.setState(prevState => ({
+                       posts: prevState.posts.concat(formItem)
+                     }));*/
+                     this.setState({
+                        posts: this.state.posts.concat(formItem)
+                      });
+                     this.setState({
+                        prePosts: this.state.prePosts.concat(this.state.posts)
+                      });
+                     console.log(this.state.prePosts);
+           }
+        }
           /*  const formItem = {
                 problem: this.state.problem,
                 solution: this.state.solution,
@@ -147,7 +160,9 @@ class SearchClassBase extends Component {
       }
     
       componentWillUnmount() {
-        this.props.firebase.posts().off();
+        var {name} = this.props.location.state;
+        this.props.firebase.db.ref(name).off();
+      // this.props.firebase.posts().off();
       }
     state = {
         open: false
@@ -158,20 +173,17 @@ class SearchClassBase extends Component {
             open: !this.state.open
         })
     }    
-
-    addPost(postBody) {
-        const postToSave = {postBody};
-        this.databaseRef.push().set(postToSave);
-
-    }
     
     handlePostEditorChange(ev){
         this.setState({ [ev.target.name]: ev.target.value });
     }
     
     savePost(problem, solution, notes){
-      //  var newPost = this.props.firebase.db.ref('test').push(); this works!!!
-        var newPost = this.props.firebase.posts().push();
+      //  console.log(this.props.location);
+        var {name} = this.props.location.state;
+      //  console.log(name);
+        var newPost = this.props.firebase.db.ref(name).push(); 
+      //  var newPost = this.props.firebase.posts().push();
         newPost.set({
             problem: problem,
             solution: solution,
@@ -199,7 +211,9 @@ class SearchClassBase extends Component {
                 notes = ' ';
             }*/
             
+
           this.savePost(problem, solution, notes);
+
           this.setState({
             problem: '',
             solution: '',
@@ -210,8 +224,9 @@ class SearchClassBase extends Component {
        /* this.props.firebase.posts().update({
             posts: this.state.posts
           });*/
-    
+
         event.preventDefault();
+
       }
 
 
@@ -220,28 +235,10 @@ class SearchClassBase extends Component {
         const { problem, solution, notes, error } = this.state;
         const { name} = this.props.location.state;
         const { classes } = this.props;
-        
-    //    const { data } = this.props.location.state;
+        console.log(this.state.posts);
+     //   console.log(this.state.prePosts)
         const { open } = this.state;
         const isInvalid = solution === '' || problem === '';
-        console.log(name);
-       
-     //   console.log(color);
-        /*                <ol>
-                    {times.map((time) =>
-                        <li key={time.id}>
-                        <div className="time-entry">
-                            {time.title}
-                        </div>
-                        <code>{time.time_stamp} seconds</code>
-                        </li>)}
-                </ol> 
-                                this.state.posts.map((item, idx) => {
-                    return (
-                        <Problem key={idx} problem={item.problem} solution={item.solution}/>
-                    )
-                })
-            }*/
         return (
             <div>
 
@@ -250,11 +247,9 @@ class SearchClassBase extends Component {
                 <Grid item xs={6} style = {{ textAlign: 'center'}}>
 
                 <Typography variant="h3">{name} </Typography>
+                {console.log(this.state.posts)}
                 {this.state.posts.map((item, idx) => {
                     return (
-                        
-                    //  <Button style = {{ margin: '0 0 0 0', padding: '0 0 0 0',
-                     // display: 'flex'}} component={Link} to="/results">  <Problem key={idx} problem={item.problem} solution={item.solution}/></Button>
                       <Link to={{
                         pathname: '/results',
                         state: {

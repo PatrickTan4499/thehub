@@ -95,7 +95,7 @@ const INITIAL_STATE = {
                 <Grid item xs={3}/>
                 <Grid item xs={6} height="1000px">
                 <img src={StudyIcon} alt="logo" height="100px" width="100px" className={classes.image}/>
-                <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your class to begin learning! :) </Typography>
+                <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your UCSD class using the class abbreviation i.e. 'COGS 120' to begin learning! :) </Typography>
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
                     <AutoCopmleteText items={courses} updateName={this.updateName.bind(this)} name={this.state.name}/> 
                 
