@@ -92,8 +92,8 @@ const INITIAL_STATE = {
 
         return (
             <Grid container textAlign="center">
-                <Grid item xs={3}/>
-                <Grid item xs={6} height="1000px">
+                <Grid item xs={1}/>
+                <Grid item xs={10} height="1000px">
                 <img src={StudyIcon} alt="logo" height="100px" width="100px" className={classes.image}/>
                 <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your class to begin learning! :) </Typography>
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
@@ -129,7 +129,7 @@ const INITIAL_STATE = {
                 </form>
                     */}
                 </Grid>
-                <Grid item xs={3}/>
+                <Grid item xs={1}/>
             </Grid>
         )
     }

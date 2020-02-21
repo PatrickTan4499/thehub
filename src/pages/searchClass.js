@@ -246,8 +246,8 @@ class SearchClassBase extends Component {
             <div>
 
             <Grid container textAlign="left">
-                <Grid item xs={3}/>
-                <Grid item xs={6} style = {{ textAlign: 'center'}}>
+                <Grid item xs={1}/>
+                <Grid item xs={10} style = {{ textAlign: 'center'}}>
 
                 <Typography variant="h3">{name} </Typography>
                 {this.state.posts.map((item, idx) => {
@@ -265,7 +265,7 @@ class SearchClassBase extends Component {
                       )
                 })
             }
-                    <IconButton color="primary" size="medium" style = {{ margin: 'auto auto auto 92%'}}>
+                    <IconButton color="primary" size="medium" style = {{ margin: 'auto auto auto 82%'}}>
                          <AddCircleIcon style = {{ width: '50px',
                                                     height: '50px',
                                                     textAlign: 'right'}} onClick={this.handleToggle}/>
@@ -356,7 +356,7 @@ class SearchClassBase extends Component {
                     </Modal>
                 </Grid>
 
-                <Grid item xs={3}/>
+                <Grid item xs={1}/>
             </Grid>
             </div>
         )

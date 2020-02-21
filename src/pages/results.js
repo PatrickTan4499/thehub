@@ -34,13 +34,13 @@ const styles ={
         const { problem, solution, notes } = this.props.location.state;
         return (
             <Grid container textAlign="left">
-                <Grid item xs={3}/>
-                <Grid item xs={6} className={classes.solution}>
+                <Grid item xs={1}/>
+                <Grid item xs={10} className={classes.solution}>
             
                     <Solution problem={problem} solution={solution} notes={notes}/>
                 </Grid>
 
-                <Grid item xs={3}/>
+                <Grid item xs={1}/>
             </Grid>
         )
     }
