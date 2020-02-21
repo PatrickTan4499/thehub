@@ -56,8 +56,8 @@ const Problem = (props) => (
     <CardActionArea component="a" href="#">
     <Card style = {{ margin: '10px auto 10px auto'}}>
         <CardContent>
-            <Typography variant="h5"  component="p" style = {{ textAlign: 'left', margin: 'auto auto auto 20px'}}> Problem: {props.problem} </Typography>
-            <Typography variant="body2" color="textSecondary" component="p" style = {{ textAlign: 'left', margin: 'auto auto auto 20px'}}>
+            <Typography variant="h6"  component="p" style = {{ textAlign: 'left', margin: 'auto auto auto auto'}}> Problem: {props.problem} </Typography>
+            <Typography variant="body2" color="textSecondary" component="p" style = {{ textAlign: 'left', margin: 'auto auto auto auto'}}>
                 Solution: {props.solution}
                 
             </Typography>

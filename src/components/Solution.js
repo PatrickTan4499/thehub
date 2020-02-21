@@ -31,31 +31,31 @@ export class Solution extends Component {
         return (
             <div>
                 
-                    <Typography variant="h3" ><Box fontWeight="fontWeightBold" m={1}>
+                    <Typography variant="h5" ><Box fontWeight="fontWeightBold" m={1}>
                     Problem:
                 </Box>   </Typography>
                         <Card className={classes.description}>
                             <CardContent>
 
-                                <Typography variant="h6"  component="p">
+                                <Typography variant="body1"  component="p">
                                 {problem}
                                 
                                 </Typography>
 
                             </CardContent>
                         </Card>
-                        <Typography variant="h3" ><Box fontWeight="fontWeightBold" m={1}>
+                        <Typography variant="h5" ><Box fontWeight="fontWeightBold" m={1}>
                     Solution:
                 </Box>   </Typography>
                         <Card className={classes.description}>
                             <CardContent>
-                                <Typography variant="body2"  component="p">
+                                <Typography variant="body1"  component="p">
                                 {solution}
                                 
                                 </Typography>
                             </CardContent>
                         </Card>
-                        <Typography variant="h4" ><Box fontWeight="fontWeightBold" m={1}>
+                        <Typography variant="h6" ><Box fontWeight="fontWeightBold" m={1}>
                     Notes:
                 </Box>   </Typography>
                         <Card className={classes.description}>
