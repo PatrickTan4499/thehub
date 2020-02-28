@@ -5,6 +5,7 @@ import './App.css';
 import NavBar from './NavBar';
 
 import home from '../pages/home';
+import home2 from '../pages/home2';
 import results from '../pages/results';
 import searchClass from '../pages/searchClass';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
@@ -42,6 +43,7 @@ const App = () => (
         <Route exact path="/" component={home} />
         <Route exact path="/signin" component={SignInPage} />
           <Route exact path="/home" component={home}></Route>
+          <Route exact path="/home2" component={home2}></Route>
           <Route exact path="/results" component={results}></Route>
           {/*<Route exact path="/results/:slug" component={results}></Route>*/}
           <Route exact path="/search" component={searchClass}></Route>

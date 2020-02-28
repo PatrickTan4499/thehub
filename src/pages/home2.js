@@ -40,7 +40,7 @@ const INITIAL_STATE = {
     redirectToReferrer: false
   };
 
- class home extends Component {
+ class home2 extends Component {
     constructor(props) {
         super(props);
 
@@ -95,7 +95,7 @@ const INITIAL_STATE = {
                 <Grid item xs={1}/>
                 <Grid item xs={10} height="1000px">
                 <img src={StudyIcon} alt="logo" height="100px" width="100px" className={classes.image}/>
-                <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your UCSD class using the class abbreviation i.e. 'COGS 120' to begin learning! :) </Typography>
+                <Typography variant="h5" className={classes.description}> Welcome to The Hub, search for your UCSD Course Number: (ex. BIMM xxx) to begin learning! :) </Typography>
                 <form className={classes.search} noValidate autoComplete="off" onSubmit={this.onSubmit} height="500px">
                     <AutoCopmleteText items={courses} updateName={this.updateName.bind(this)} name={this.state.name}/> 
                 
@@ -135,7 +135,7 @@ const INITIAL_STATE = {
     }
 }
 
-home.propTypes = {
+home2.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
@@ -145,5 +145,4 @@ export default compose(
     withStyles(styles),
     withAuthorization(condition),
   withRouter,
-)(home);
-//export default withStyles(styles)(home);
+)(home2);
