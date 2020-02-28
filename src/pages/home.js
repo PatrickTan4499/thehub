@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import { withAuthorization, withEmailVerification, AuthUserContext, } from '../components/Session';
+import { withAuthorization} from '../components/Session';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import Link from 'react-router-dom/Link';
+
 import { compose } from 'recompose';
-import axios from 'axios';
+
 import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
+
+import { withStyles} from '@material-ui/core/styles';
 import StudyIcon from '../images/study.png';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
-import { logicalExpression } from '@babel/types';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+
 import AutoCopmleteText from '../components/Search/AutoCompleteText.js'
 import courses from '../components/Search/courses.js'
-import GoogleLogin from 'react-google-login';
+
 
 const styles = {
     search: {
@@ -34,11 +31,7 @@ const styles = {
     }
 }
 
-const INITIAL_STATE = {
-    name: 'abc',
-    error: null,
-    redirectToReferrer: false
-  };
+
 
  class home extends Component {
     constructor(props) {
@@ -55,7 +48,10 @@ const INITIAL_STATE = {
 
     updateName = (newName) => {
         console.log(newName);
-        this.state.name = newName.toUpperCase();
+        this.setState({
+            name: newName.toUpperCase()
+        })
+      //  this.state.name = newName.toUpperCase();
         //this.setState({name: newName});
         console.log(this.state.name);
     };
@@ -76,9 +72,8 @@ const INITIAL_STATE = {
     
     render() {
         console.log(this.props.location);
-        const { name, error } = this.state;
         const { classes } = this.props;
-        const isInvalid = name === '';
+
         const redirectToReferrer = this.state.redirectToReferrer;
 
         if (redirectToReferrer === true) {

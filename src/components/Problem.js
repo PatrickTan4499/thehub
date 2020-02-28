@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
+import React from 'react'
+import { withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+
 import CardContent from '@material-ui/core/CardContent';
 import { Typography, CardActionArea } from '@material-ui/core';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
+
 
 const styles ={
     solution: {

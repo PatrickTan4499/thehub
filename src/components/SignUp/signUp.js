@@ -8,16 +8,15 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core' 
-import blue from '@material-ui/core/colors/blue'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -92,7 +91,7 @@ class SignUpFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state;
+    const { email, passwordOne } = this.state;
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
@@ -161,7 +160,6 @@ class SignUpFormBase extends Component {
             fullWidth
             name="passwordOne"
             label="Password"
-            type="passwordOne"
             id="passwordOne"
             autoComplete="passwordOne"
             value={passwordOne}
@@ -176,7 +174,6 @@ class SignUpFormBase extends Component {
             fullWidth
             name="passwordTwo"
             label="Confirm Password"
-            type="passwordTwo"
             id="passwordTwo"
             autoComplete="passwordTwo"
             value={passwordTwo}

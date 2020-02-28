@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
-import Link from 'react-router-dom/Link';
+
 import { compose } from 'recompose';
-import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
-import { withAuthorization, withEmailVerification, AuthUserContext, } from '../components/Session';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import { Typography } from '@material-ui/core';
+import {  withStyles} from '@material-ui/core/styles';
+import { withAuthorization } from '../components/Session';
+
 import Solution from '../components/Solution'
 import { withRouter } from 'react-router-dom';
 
@@ -24,7 +20,7 @@ const styles ={
  class results extends Component {
 
     componentDidMount(){
-        const { problem, solution, notes } = this.props.location.state;
+      //  const { problem, solution, notes } = this.props.location.state;
         //console.log(this.props.location);
 
     }

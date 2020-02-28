@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Link from 'react-router-dom/Link';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -6,12 +6,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import StudyIcon from '../images/study.png';
-import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
-import {MuiThemeProvider, createMuiTheme} from '@material-ui/core';
+
+import {createMuiTheme} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import SignOutButton from './SignOut/signOut';
-import app from 'firebase/app';
-import SignOut from './SignOut/signOut';
+
 
 import { AuthUserContext } from './Session';
 
@@ -20,7 +19,7 @@ import { AuthUserContext } from './Session';
         margin: 'auto auto auto auto'
     }
 }*/
-
+/*
 const useStyles = makeStyles(theme => ({
     '@global': {
       body: {
@@ -33,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     button: {
       margin: theme.spacing(5),
     },
-  }));
+  }));*/
   
   
   const theme = createMuiTheme({

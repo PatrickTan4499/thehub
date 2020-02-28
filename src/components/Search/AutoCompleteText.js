@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import { logicalExpression } from '@babel/types';
+import React from 'react';
+
+import { withStyles} from '@material-ui/core/styles';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AutoCompleteText.css';
@@ -86,7 +81,7 @@ class AutoCompleteText extends React.Component {
     
     render() {
         const { text } = this.state;
-        const { name, error } = this.state;
+        const { error } = this.state;
         const { classes } = this.props;
         const isInvalid = text === '';
 

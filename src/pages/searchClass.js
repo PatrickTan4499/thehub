@@ -1,35 +1,34 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component} from 'react'
 import Link from 'react-router-dom/Link';
 import { withFirebase } from '../components/Firebase';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import firebase from '../components/Firebase';
-import app from '../components/Firebase';
-import { withAuthorization, withEmailVerification, AuthUserContext, } from '../components/Session';
+
+import { withAuthorization} from '../components/Session';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles, useTheme, fade, withStyles} from '@material-ui/core/styles';
+import { withStyles} from '@material-ui/core/styles';
 import Problem from '../components/Problem';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
-import Upload from '../components/Upload';
+
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+
 import CardContent from '@material-ui/core/CardContent';
 import 'firebase/firestore';
-import Solution from '../components/Solution';
+
 import './searchClass.css';
 
 const styles ={
     solution: {
-        textAlign: 'center'
+        textAlign: 'center',
+        height: '290px'
     },
     card: {
         display: 'flex'
@@ -54,9 +53,6 @@ const styles ={
       problem: {
         height: '100px'
       },
-      solution: {
-        height: '290px'
-      },
       notes: {
         height: '60px',
         margin: 'auto auto 30px auto'
@@ -66,11 +62,11 @@ const styles ={
 
 
 
-const SearchClassPage = () => (
+/*const SearchClassPage = () => (
 
     <SearchClass />
 
-);
+);*/
 
 class SearchClassBase extends Component {
     constructor(props){
@@ -232,9 +228,9 @@ class SearchClassBase extends Component {
 
     render() {
        // console.log(this.props.location);
-        const { problem, solution, notes, error } = this.state;
+        const { problem, solution,  error } = this.state;
         const { name} = this.props.location.state;
-        const { classes } = this.props;
+       // const { classes } = this.props;
         console.log(this.state.posts);
      //   console.log(this.state.prePosts)
         const { open } = this.state;
@@ -360,7 +356,7 @@ class SearchClassBase extends Component {
 
 //export default withStyles(styles)(SearchClassPage);
 
-const SearchClass = withFirebase(SearchClassBase);
+//const SearchClass = withFirebase(SearchClassBase);
 
 const condition = authUser => !!authUser;
 
