@@ -5,6 +5,7 @@ import { withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AutoCompleteText.css';
+import ReactGA from 'react-ga';
 
 const styles = {
     search: {
@@ -51,7 +52,12 @@ class AutoCompleteText extends React.Component {
         }
         var suggestion = [];
         for (var i = 0; i < 5; i++) {
-            suggestion.push(suggestions[i]);
+            if(suggestions[i]){
+                //console.log("hello");
+                suggestion.push(suggestions[i]);
+            }
+
+
         }
         
         return (
@@ -66,6 +72,11 @@ class AutoCompleteText extends React.Component {
             text: value, 
             suggestions: [],
         }))
+        ReactGA.event({
+            category: 'Button',
+            action: 'User used autocomplete'
+        })
+       // alert('done')
     }
 
     onSubmit(e) {

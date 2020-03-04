@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
@@ -14,8 +14,15 @@ import SignUpPage from './SignUp/signUp';
 import SignInPage from './SignIn/signIn';
 
 import { withAuthentication } from './Session';
+import Reactga from 'react-ga';
 
+/*function App(){
+  useEffect(() => {
+    Reactga.initialize('UA-158799170-2')
 
+    Reactga.pageview('/')
+  }, [])
+}*/
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -33,7 +40,15 @@ const theme = createMuiTheme({
 }
 });
 
-const App = () => (
+//const App = () => (
+
+function App() {
+  useEffect(() => {
+    Reactga.initialize('UA-158799170-2')
+
+    Reactga.pageview(window.location.pathname + window.location.search)
+  }, [])
+  return (
     <MuiThemeProvider theme={theme}>
     <div className="App">
       <Router>
@@ -55,7 +70,9 @@ const App = () => (
       </Router>
     </div>
     </MuiThemeProvider>
-  );
+  )
+};
+ // );
 
 
 

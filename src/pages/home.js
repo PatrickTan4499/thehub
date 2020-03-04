@@ -51,6 +51,11 @@ const styles = {
         this.setState({
             name: newName.toUpperCase()
         })
+      /*  ReactGA.event({
+            category: 'Button',
+            action: 'User used autocomplete'
+        })
+        alert("done")*/
       //  this.state.name = newName.toUpperCase();
         //this.setState({name: newName});
         console.log(this.state.name);
@@ -61,7 +66,12 @@ const styles = {
         this.setState({
             redirectToReferrer: true,
         })
-        console.log(name);
+       /* ReactGA.event({
+            category: 'Button',
+            action: 'User searched for class'
+        })
+        alert("done")*/
+        //console.log(name);
        // this.props.history.push('/search');
     /*   <Redirect to={{
         pathname: '/search',
