@@ -69,8 +69,8 @@ const Navigation = () => (
     <AppBar style={{ background: theme.palette.primary.mainGradient }}>
         <Toolbar>
             <Button color="inherit" component={Link} to="/home">Home</Button>
-         {/*   <Button color="inherit" component={Link} to="/home2">Home2 (version B)</Button>
-            <Button color="inherit" component={Link} to="/search">Search</Button>
+           <Button color="inherit" component={Link} to="/home2">Home2 (version B)</Button>
+           {/* <Button color="inherit" component={Link} to="/search">Search</Button>
         <Button color="inherit" component={Link} to="/results">Results</Button> */} 
                   <Typography style={{flex: 1}}></Typography>
             <SignOutButton/>
